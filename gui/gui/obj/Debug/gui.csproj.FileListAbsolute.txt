@@ -1,0 +1,20 @@
+D:\Insert\gui\gui\bin\Debug\gui.exe.config
+D:\Insert\gui\gui\bin\Debug\gui.exe
+D:\Insert\gui\gui\bin\Debug\gui.pdb
+D:\Insert\gui\gui\obj\Debug\gui.csprojResolveAssemblyReference.cache
+D:\Insert\gui\gui\obj\Debug\gui.files_pro.resources
+D:\Insert\gui\gui\obj\Debug\gui.Form1.resources
+D:\Insert\gui\gui\obj\Debug\gui.Properties.Resources.resources
+D:\Insert\gui\gui\obj\Debug\gui.csproj.GenerateResource.Cache
+D:\Insert\gui\gui\obj\Debug\gui.exe
+D:\Insert\gui\gui\obj\Debug\gui.pdb
+C:\Users\Mayar khaled\Downloads\gui-20190424T223849Z-001\gui\gui\bin\Debug\gui.exe.config
+C:\Users\Mayar khaled\Downloads\gui-20190424T223849Z-001\gui\gui\obj\Debug\gui.exe
+C:\Users\Mayar khaled\Downloads\gui-20190424T223849Z-001\gui\gui\obj\Debug\gui.pdb
+C:\Users\Mayar khaled\Downloads\gui-20190424T223849Z-001\gui\gui\bin\Debug\gui.exe
+C:\Users\Mayar khaled\Downloads\gui-20190424T223849Z-001\gui\gui\bin\Debug\gui.pdb
+C:\Users\Mayar khaled\Downloads\gui-20190424T223849Z-001\gui\gui\obj\Debug\gui.csprojResolveAssemblyReference.cache
+C:\Users\Mayar khaled\Downloads\gui-20190424T223849Z-001\gui\gui\obj\Debug\gui.files_pro.resources
+C:\Users\Mayar khaled\Downloads\gui-20190424T223849Z-001\gui\gui\obj\Debug\gui.Form1.resources
+C:\Users\Mayar khaled\Downloads\gui-20190424T223849Z-001\gui\gui\obj\Debug\gui.Properties.Resources.resources
+C:\Users\Mayar khaled\Downloads\gui-20190424T223849Z-001\gui\gui\obj\Debug\gui.csproj.GenerateResource.Cache
