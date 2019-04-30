@@ -16,19 +16,22 @@ namespace gui
         string _file_name;
         char _delimiter;
         public string[] colums;
+        bool isNull = false;
+        Dictionary<string, List<string>> map = new Dictionary<string, List<string>>();
         public files_pro(string file_name, char delimiter)
         {
             InitializeComponent();
             _file_name = file_name;
             _delimiter = delimiter;
         }
-        
+        string[] recordes;
+
         private void files_pro_Load(object sender, EventArgs e)
         {
             dataGridView1.Rows.Clear();
             string fileExt = System.IO.Path.GetExtension(_file_name);
-            string[] recordes;
-            
+
+
             if (fileExt == ".txt")
             {
                 FileStream f = new FileStream(_file_name, FileMode.OpenOrCreate);
@@ -49,6 +52,19 @@ namespace gui
             {
 
             }
+            for (int i = 0; i < colums.Length; i++)
+            {
+                List<string> mylist = new List<string>();
+                for (int j = 1; j < recordes.Length; j++)
+                {
+                    string[] arr;
+                    arr = recordes[j].Split('@');
+                    mylist.Add(arr[i]);
+                }
+
+                map[colums[i]] = mylist;
+            }
+
         }
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
@@ -59,6 +75,12 @@ namespace gui
                 comboBox2.Visible = true;
                 textBox2.Visible = true;
             }
+            if (comboBox1.Text == "Default")
+            {
+                label4.Visible = true;
+                textBox3.Visible = true;
+            }
+
         }
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -68,19 +90,184 @@ namespace gui
 
         private void button1_Click(object sender, EventArgs e)
         {
+            List<string> list = new List<string>();
+            string col_name = textBox1.Text.Trim();
             string _col = Array.Find(colums, Col => Col == textBox1.Text);
             if (_col != null)
             {
-                MessageBox.Show("Dond");
+                MessageBox.Show("Done");
             }
             else
             {
                 MessageBox.Show("Please Enter correct name for column");
             }
+            if (comboBox1.Text == "NOT NULL")
+            {
+                list = map[col_name];
+                for (int i = 0; i < list.Count; i++)
+                {
+                    if (list[i] == "")
+                    {
+                        MessageBox.Show(col_name + " contains NULL values ");
+                        return;
+                    }
+                }
+            }
+            if (comboBox1.Text == "Defult")
+            {
+                string defult = textBox3.Text.Trim();
+                list = map[col_name];
+                for (int i = 0; i < list.Count; i++)
+                {
+                    if (list[i] == "")
+                    {
+                        list[i] = defult;
+                    }
+                }
+            }
+            if (comboBox1.Text == "Unique")
+            {
+                HashSet<string> set = new HashSet<string>();
+                list = map[col_name];
+                for (int i = 0; i < list.Count; i++)
+                {
+                    set.Add(list[i]);
+                }
+
+                if (set.Count != list.Count)
+                {
+                    MessageBox.Show(col_name + " contains repeated values ");
+                    return;
+                }
+            }
+            if (comboBox1.Text == "Check")
+            {
+                if (comboBox2.Text == ">")
+                {
+                    int cond = 0;
+                    Int32.TryParse(textBox2.Text, out cond);
+                    int c = 0;
+                    list = map[col_name];
+                    for (int i = 0; i < list.Count; i++)
+                    {
+                        int list_int = 0;
+                        Int32.TryParse(list[i], out list_int);
+                        if (list_int > cond)
+                        {
+                            c++;
+                        }
+                    }
+                    if (c != list.Count)
+                    {
+                        MessageBox.Show("Some values do not apply this condition in " + col_name);
+                        return;
+                    }
+                }
+                if (comboBox2.Text == "<")
+                {
+                    int cond = 0;
+                    Int32.TryParse(textBox2.Text, out cond);
+                    int c = 0;
+                    list = map[col_name];
+                    for (int i = 0; i < list.Count; i++)
+                    {
+                        int list_int = 0;
+                        Int32.TryParse(list[i], out list_int);
+                        if (list_int < cond)
+                        {
+                            c++;
+                        }
+                    }
+                    if (c != list.Count)
+                    {
+                        MessageBox.Show("Some values do not apply this condition in " + col_name);
+                        return;
+                    }
+                }
+                if (comboBox2.Text == ">=")
+                {
+                    int cond = 0;
+                    Int32.TryParse(textBox2.Text, out cond);
+                    int c = 0;
+                    list = map[col_name];
+                    for (int i = 0; i < list.Count; i++)
+                    {
+                        int list_int = 0;
+                        Int32.TryParse(list[i], out list_int);
+                        if (list_int >= cond)
+                        {
+                            c++;
+                        }
+                    }
+                    if (c != list.Count)
+                    {
+                        MessageBox.Show("Some values do not apply this condition in " + col_name);
+                        return;
+                    }
+                }
+                if (comboBox2.Text == "<=")
+                {
+                    int cond = 0;
+                    Int32.TryParse(textBox2.Text, out cond);
+                    int c = 0;
+                    list = map[col_name];
+                    for (int i = 0; i < list.Count; i++)
+                    {
+                        int list_int = 0;
+                        Int32.TryParse(list[i], out list_int);
+                        if (list_int <= cond)
+                        {
+                            c++;
+                        }
+                    }
+                    if (c != list.Count)
+                    {
+                        MessageBox.Show("Some values do not apply this condition in " + col_name);
+                        return;
+                    }
+                }
+                if (comboBox2.Text == "=")
+                {
+                    int c = 0;
+                    list = map[col_name];
+                    for (int i = 0; i < list.Count; i++)
+                    {
+                        if (list[i] == textBox2.Text)
+                        {
+                            c++;
+                        }
+                    }
+                    if (c != list.Count)
+                    {
+                        MessageBox.Show("Some values do not apply this condition in " + col_name);
+                        return;
+                    }
+                }
+                if (comboBox2.Text == "!=")
+                {
+                    int c = 0;
+                    list = map[col_name];
+                    for (int i = 0; i < list.Count; i++)
+                    {
+                        if (list[i] != textBox2.Text)
+                        {
+                            c++;
+                        }
+                    }
+                    if (c != list.Count)
+                    {
+                        MessageBox.Show("Some values do not apply this condition in " + col_name);
+                        return;
+                    }
+                }
+
+
+            }
+
             textBox1.Text = string.Empty;
             comboBox1.Text = string.Empty;
-            comboBox2.Text= string.Empty ;
-            textBox2.Text= string.Empty;
+            comboBox2.Text = string.Empty;
+            textBox2.Text = string.Empty;
 
         }
 
@@ -95,6 +282,21 @@ namespace gui
         }
 
         private void textBox2_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBox3_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label4_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label2_Click(object sender, EventArgs e)
         {
 
         }
