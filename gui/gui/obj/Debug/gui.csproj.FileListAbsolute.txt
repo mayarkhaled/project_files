@@ -38,3 +38,14 @@ C:\Users\User\Desktop\project_files\gui\gui\obj\Debug\gui.files_pro.resources
 C:\Users\User\Desktop\project_files\gui\gui\obj\Debug\gui.Form1.resources
 C:\Users\User\Desktop\project_files\gui\gui\obj\Debug\gui.Properties.Resources.resources
 C:\Users\User\Desktop\project_files\gui\gui\obj\Debug\gui.csproj.GenerateResource.Cache
+C:\Users\lero1\PycharmProjects\untitled1\project_files\gui\gui\bin\Debug\gui.exe.config
+C:\Users\lero1\PycharmProjects\untitled1\project_files\gui\gui\bin\Debug\gui.exe
+C:\Users\lero1\PycharmProjects\untitled1\project_files\gui\gui\bin\Debug\gui.pdb
+C:\Users\lero1\PycharmProjects\untitled1\project_files\gui\gui\obj\Debug\gui.csprojResolveAssemblyReference.cache
+C:\Users\lero1\PycharmProjects\untitled1\project_files\gui\gui\obj\Debug\gui.files_pro.resources
+C:\Users\lero1\PycharmProjects\untitled1\project_files\gui\gui\obj\Debug\gui.Form1.resources
+C:\Users\lero1\PycharmProjects\untitled1\project_files\gui\gui\obj\Debug\gui.Properties.Resources.resources
+C:\Users\lero1\PycharmProjects\untitled1\project_files\gui\gui\obj\Debug\gui.csproj.GenerateResource.Cache
+C:\Users\lero1\PycharmProjects\untitled1\project_files\gui\gui\obj\Debug\gui.exe
+C:\Users\lero1\PycharmProjects\untitled1\project_files\gui\gui\obj\Debug\gui.pdb
+C:\Users\lero1\PycharmProjects\untitled1\project_files\gui\gui\obj\Debug\gui.csproj.ResolveComReference.cache

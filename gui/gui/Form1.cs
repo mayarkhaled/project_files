@@ -12,6 +12,7 @@ namespace gui
 {
     public partial class Form1 : Form
     {
+        string path = string.Empty;
         public string filename;
         public Form1()
         {
@@ -33,7 +34,7 @@ namespace gui
                 label3.Text = filename;
                 label2.Visible = true;
                 label3.Visible = true;
-                files_pro fp = new files_pro(filename, '.');
+                files_pro fp = new files_pro(path, '.');
                 flowLayoutPanel1.Controls.Add(fp);
             }
         }
@@ -82,7 +83,7 @@ namespace gui
         }
         private string select_file()
         {
-            string path = string.Empty;
+            
             OpenFileDialog file = new OpenFileDialog();
             if (file.ShowDialog() == DialogResult.OK)
             {
