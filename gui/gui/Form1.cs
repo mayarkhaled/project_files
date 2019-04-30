@@ -70,9 +70,15 @@ namespace gui
 
         private void button1_Click(object sender, EventArgs e)
         {
+            if(textBox3.Text==string.Empty && radioButton1.Checked)
+            {
+                MessageBox.Show("Please Enter delimeter");
+            }
+            else { 
             files_pro fp = new files_pro(filename, textBox3.Text[0]);
             flowLayoutPanel1.Controls.Add(fp);
             textBox3.Clear();
+            }
         }
         private string select_file()
         {
@@ -87,6 +93,11 @@ namespace gui
         }
 
         private void flowLayoutPanel1_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void textBox3_TextChanged(object sender, EventArgs e)
         {
 
         }

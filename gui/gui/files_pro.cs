@@ -71,12 +71,17 @@ namespace gui
         {
             if (comboBox1.Text == "Check")
             {
+                label4.Visible =false;
+                textBox3.Visible = false;
                 label2.Visible = true;
                 comboBox2.Visible = true;
                 textBox2.Visible = true;
             }
             if (comboBox1.Text == "Default")
             {
+                label2.Visible = false;
+                comboBox2.Visible = false;
+                textBox2.Visible = false;
                 label4.Visible = true;
                 textBox3.Visible = true;
             }
@@ -297,6 +302,11 @@ namespace gui
         }
 
         private void label2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBox3_TextChanged_1(object sender, EventArgs e)
         {
 
         }
