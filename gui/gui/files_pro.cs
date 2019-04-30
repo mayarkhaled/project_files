@@ -64,7 +64,7 @@ namespace gui
 
             else if (fileExt == ".xlsx")
             {
-
+                
                 Excel.Application xlApp = new Excel.Application();
                 Excel.Workbook xlWorkbook = xlApp.Workbooks.Open(_file_name);
                 Excel._Worksheet xlWorksheet = xlWorkbook.Sheets[1];
@@ -83,7 +83,12 @@ namespace gui
                     }
                     map[colums[j-1]] = mylist;
                 }
-
+                dataGridView1.Columns.Add("columns1", "file columns");
+                dataGridView1.Columns.Add("columns2", "columns name");
+                for (int i = 0; i < colums.Length; i++)
+                {
+                    dataGridView1.Rows.Add(new string[] { "column" + (i + 1), colums[i] });
+                }
                 //cleanup
                 GC.Collect();
                 GC.WaitForPendingFinalizers();
