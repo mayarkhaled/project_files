@@ -1,1 +1,1 @@
-item@id@price/shose@1@30/cheese@2@10/headohone@3@100
+item@id@price/@1@30/cheese@2@10/headohone@3@100

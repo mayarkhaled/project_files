@@ -113,7 +113,7 @@ namespace gui
                     }
                 }
             }
-            if (comboBox1.Text == "Defult")
+            if (comboBox1.Text == "Default")
             {
                 string defult = textBox3.Text.Trim();
                 list = map[col_name];
@@ -262,6 +262,14 @@ namespace gui
                 }
 
 
+            }
+            foreach (KeyValuePair<string, List<string>> m in map)
+            {
+                MessageBox.Show(m.Key);
+                for (int i = 0; i < m.Value.Count; i++)
+                {
+                    MessageBox.Show(m.Value[i]);
+                }
             }
 
             textBox1.Text = string.Empty;
