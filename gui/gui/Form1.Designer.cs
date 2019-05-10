@@ -58,6 +58,7 @@
             this.textBox3.Size = new System.Drawing.Size(101, 24);
             this.textBox3.TabIndex = 29;
             this.textBox3.Visible = false;
+            this.textBox3.TextChanged += new System.EventHandler(this.textBox3_TextChanged);
             // 
             // label4
             // 

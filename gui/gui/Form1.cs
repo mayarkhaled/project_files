@@ -12,6 +12,7 @@ namespace gui
 {
     public partial class Form1 : Form
     {
+        string path = string.Empty;
         public string filename;
         public Form1()
         {
@@ -33,7 +34,7 @@ namespace gui
                 label3.Text = filename;
                 label2.Visible = true;
                 label3.Visible = true;
-                files_pro fp = new files_pro(filename, '.');
+                files_pro fp = new files_pro(path, '.');
                 flowLayoutPanel1.Controls.Add(fp);
             }
         }
@@ -70,13 +71,19 @@ namespace gui
 
         private void button1_Click(object sender, EventArgs e)
         {
+            if(textBox3.Text==string.Empty && radioButton1.Checked)
+            {
+                MessageBox.Show("Please Enter delimeter");
+            }
+            else { 
             files_pro fp = new files_pro(filename, textBox3.Text[0]);
             flowLayoutPanel1.Controls.Add(fp);
             textBox3.Clear();
+            }
         }
         private string select_file()
         {
-            string path = string.Empty;
+            
             OpenFileDialog file = new OpenFileDialog();
             if (file.ShowDialog() == DialogResult.OK)
             {
@@ -87,6 +94,11 @@ namespace gui
         }
 
         private void flowLayoutPanel1_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void textBox3_TextChanged(object sender, EventArgs e)
         {
 
         }

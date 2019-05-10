@@ -8,6 +8,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
+using System.Runtime.InteropServices;
+using Excel = Microsoft.Office.Interop.Excel;
 
 namespace gui
 {
@@ -46,24 +48,58 @@ namespace gui
                 }
                 SR.Close();
                 f.Close();
-            }
-
-            else if (fileExt == ".xls")
-            {
-
-            }
-            for (int i = 0; i < colums.Length; i++)
-            {
-                List<string> mylist = new List<string>();
-                for (int j = 1; j < recordes.Length; j++)
+                for (int i = 0; i < colums.Length; i++)
                 {
-                    string[] arr;
-                    arr = recordes[j].Split('@');
-                    mylist.Add(arr[i]);
-                }
+                    List<string> mylist = new List<string>();
+                    for (int j = 1; j < recordes.Length; j++)
+                    {
+                        string[] arr;
+                        arr = recordes[j].Split('@');
+                        mylist.Add(arr[i]);
+                    }
 
-                map[colums[i]] = mylist;
+                    map[colums[i]] = mylist;
+                }
             }
+
+            else if (fileExt == ".xlsx")
+            {
+                
+                Excel.Application xlApp = new Excel.Application();
+                Excel.Workbook xlWorkbook = xlApp.Workbooks.Open(_file_name);
+                Excel._Worksheet xlWorksheet = xlWorkbook.Sheets[1];
+                Excel.Range xlRange = xlWorksheet.UsedRange;
+
+                int rowCount = xlRange.Rows.Count;
+                int colCount = xlRange.Columns.Count;
+                colums = new String[colCount];
+                for (int i = 1; i <= colCount; i++) {
+                    colums[i - 1] = xlRange.Cells[1, i].Value2.ToString();
+                }
+                for (int j = 1; j <= colCount; j++){
+                    List<string> mylist = new List<string>();
+                    for (int i = 2; i <= rowCount; i++){
+                        mylist.Add(xlRange.Cells[i, j].Value2.ToString());
+                    }
+                    map[colums[j-1]] = mylist;
+                }
+                dataGridView1.Columns.Add("columns1", "file columns");
+                dataGridView1.Columns.Add("columns2", "columns name");
+                for (int i = 0; i < colums.Length; i++)
+                {
+                    dataGridView1.Rows.Add(new string[] { "column" + (i + 1), colums[i] });
+                }
+                //cleanup
+                GC.Collect();
+                GC.WaitForPendingFinalizers();
+                Marshal.ReleaseComObject(xlRange);
+                Marshal.ReleaseComObject(xlWorksheet);
+                xlWorkbook.Close();
+                Marshal.ReleaseComObject(xlWorkbook);
+                xlApp.Quit();
+                Marshal.ReleaseComObject(xlApp);
+            }
+            
 
         }
 
@@ -71,12 +107,17 @@ namespace gui
         {
             if (comboBox1.Text == "Check")
             {
+                label4.Visible =false;
+                textBox3.Visible = false;
                 label2.Visible = true;
                 comboBox2.Visible = true;
                 textBox2.Visible = true;
             }
             if (comboBox1.Text == "Default")
             {
+                label2.Visible = false;
+                comboBox2.Visible = false;
+                textBox2.Visible = false;
                 label4.Visible = true;
                 textBox3.Visible = true;
             }
@@ -305,6 +346,11 @@ namespace gui
         }
 
         private void label2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBox3_TextChanged_1(object sender, EventArgs e)
         {
 
         }
