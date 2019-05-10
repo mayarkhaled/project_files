@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
 using System.Runtime.InteropServices;
-//using Excel = Microsoft.Office.Interop.Excel;
+using Excel = Microsoft.Office.Interop.Excel;
 using System.Xml;
 
 namespace gui
@@ -63,7 +63,7 @@ namespace gui
                 }
             }
 
-           /* else if (fileExt == ".xlsx")
+            else if (fileExt == ".xlsx")
             {
                 
                 Excel.Application xlApp = new Excel.Application();
@@ -99,7 +99,7 @@ namespace gui
                 Marshal.ReleaseComObject(xlWorkbook);
                 xlApp.Quit();
                 Marshal.ReleaseComObject(xlApp);
-            }*/
+            }
             
 
         }
@@ -305,8 +305,7 @@ namespace gui
                 comboBox1.Text = string.Empty;
                 comboBox2.Text = string.Empty;
                 textBox2.Text = string.Empty;
-                map[col_name] = list;
-
+               
             }
             else
             {
