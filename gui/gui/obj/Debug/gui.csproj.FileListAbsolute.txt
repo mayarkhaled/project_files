@@ -49,3 +49,4 @@ C:\Users\lero1\PycharmProjects\untitled1\project_files\gui\gui\obj\Debug\gui.csp
 C:\Users\lero1\PycharmProjects\untitled1\project_files\gui\gui\obj\Debug\gui.exe
 C:\Users\lero1\PycharmProjects\untitled1\project_files\gui\gui\obj\Debug\gui.pdb
 C:\Users\lero1\PycharmProjects\untitled1\project_files\gui\gui\obj\Debug\gui.csproj.ResolveComReference.cache
+C:\Users\Mayar khaled\Desktop\project_files\gui\gui\obj\Debug\gui.csproj.ResolveComReference.cache

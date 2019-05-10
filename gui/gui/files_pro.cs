@@ -99,7 +99,18 @@ namespace gui
                 xlApp.Quit();
                 Marshal.ReleaseComObject(xlApp);
             }
-            
+            for (int i = 0; i < colums.Length; i++)
+            {
+                List<string> mylist = new List<string>();
+                for (int j = 1; j < recordes.Length; j++)
+                {
+                    string[] arr;
+                    arr = recordes[j].Split('@');
+                    mylist.Add(arr[i]);
+                }
+
+                map[colums[i]] = mylist;
+            }
 
         }
 
@@ -304,14 +315,14 @@ namespace gui
 
 
             }
-            foreach (KeyValuePair<string, List<string>> m in map)
+           /* foreach (KeyValuePair<string, List<string>> m in map)
             {
                 MessageBox.Show(m.Key);
                 for (int i = 0; i < m.Value.Count; i++)
                 {
                     MessageBox.Show(m.Value[i]);
                 }
-            }
+            }*/
 
             textBox1.Text = string.Empty;
             comboBox1.Text = string.Empty;
