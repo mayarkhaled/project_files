@@ -9,7 +9,8 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
 using System.Runtime.InteropServices;
-using Excel = Microsoft.Office.Interop.Excel;
+//using Excel = Microsoft.Office.Interop.Excel;
+using System.Xml;
 
 namespace gui
 {
@@ -58,11 +59,11 @@ namespace gui
                         mylist.Add(arr[i]);
                     }
 
-                    map[colums[i]] = mylist;
+                   // map[colums[i]] = mylist;
                 }
             }
 
-            else if (fileExt == ".xlsx")
+           /* else if (fileExt == ".xlsx")
             {
                 
                 Excel.Application xlApp = new Excel.Application();
@@ -98,7 +99,7 @@ namespace gui
                 Marshal.ReleaseComObject(xlWorkbook);
                 xlApp.Quit();
                 Marshal.ReleaseComObject(xlApp);
-            }
+            }*/
             
 
         }
@@ -137,178 +138,181 @@ namespace gui
             if (_col != null)
             {
                 MessageBox.Show("Done");
+                if (comboBox1.Text == "NOT NULL")
+                {
+                    list = map[col_name];
+                    for (int i = 0; i < list.Count; i++)
+                    {
+                        if (list[i] == "")
+                        {
+                            MessageBox.Show(col_name + " contains NULL values ");
+                            return;
+                        }
+                    }
+                }
+                if (comboBox1.Text == "Default")
+                {
+                    string defult = textBox3.Text.Trim();
+                    list = map[col_name];
+                    for (int i = 0; i < list.Count; i++)
+                    {
+                        if (list[i] == "")
+                        {
+                            list[i] = defult;
+                        }
+                    }
+                }
+                if (comboBox1.Text == "Unique")
+                {
+                    HashSet<string> set = new HashSet<string>();
+                    list = map[col_name];
+                    for (int i = 0; i < list.Count; i++)
+                    {
+                        set.Add(list[i]);
+                    }
+
+                    if (set.Count != list.Count)
+                    {
+                        MessageBox.Show(col_name + " contains repeated values ");
+                        return;
+                    }
+                }
+                if (comboBox1.Text == "Check")
+                {
+                    if (comboBox2.Text == ">")
+                    {
+                        int cond = 0;
+                        Int32.TryParse(textBox2.Text, out cond);
+                        int c = 0;
+                        list = map[col_name];
+                        for (int i = 0; i < list.Count; i++)
+                        {
+                            int list_int = 0;
+                            Int32.TryParse(list[i], out list_int);
+                            if (list_int > cond)
+                            {
+                                c++;
+                            }
+                        }
+                        if (c != list.Count)
+                        {
+                            MessageBox.Show("Some values do not apply this condition in " + col_name);
+                            return;
+                        }
+                    }
+                    if (comboBox2.Text == "<")
+                    {
+                        int cond = 0;
+                        Int32.TryParse(textBox2.Text, out cond);
+                        int c = 0;
+                        list = map[col_name];
+                        for (int i = 0; i < list.Count; i++)
+                        {
+                            int list_int = 0;
+                            Int32.TryParse(list[i], out list_int);
+                            if (list_int < cond)
+                            {
+                                c++;
+                            }
+                        }
+                        if (c != list.Count)
+                        {
+                            MessageBox.Show("Some values do not apply this condition in " + col_name);
+                            return;
+                        }
+                    }
+                    if (comboBox2.Text == ">=")
+                    {
+                        int cond = 0;
+                        Int32.TryParse(textBox2.Text, out cond);
+                        int c = 0;
+                        list = map[col_name];
+                        for (int i = 0; i < list.Count; i++)
+                        {
+                            int list_int = 0;
+                            Int32.TryParse(list[i], out list_int);
+                            if (list_int >= cond)
+                            {
+                                c++;
+                            }
+                        }
+                        if (c != list.Count)
+                        {
+                            MessageBox.Show("Some values do not apply this condition in " + col_name);
+                            return;
+                        }
+                    }
+                    if (comboBox2.Text == "<=")
+                    {
+                        int cond = 0;
+                        Int32.TryParse(textBox2.Text, out cond);
+                        int c = 0;
+                        list = map[col_name];
+                        for (int i = 0; i < list.Count; i++)
+                        {
+                            int list_int = 0;
+                            Int32.TryParse(list[i], out list_int);
+                            if (list_int <= cond)
+                            {
+                                c++;
+                            }
+                        }
+                        if (c != list.Count)
+                        {
+                            MessageBox.Show("Some values do not apply this condition in " + col_name);
+                            return;
+                        }
+                    }
+                    if (comboBox2.Text == "=")
+                    {
+                        int c = 0;
+                        list = map[col_name];
+                        for (int i = 0; i < list.Count; i++)
+                        {
+                            if (list[i] == textBox2.Text)
+                            {
+                                c++;
+                            }
+                        }
+                        if (c != list.Count)
+                        {
+                            MessageBox.Show("Some values do not apply this condition in " + col_name);
+                            return;
+                        }
+                    }
+                    if (comboBox2.Text == "!=")
+                    {
+                        int c = 0;
+                        list = map[col_name];
+                        for (int i = 0; i < list.Count; i++)
+                        {
+                            if (list[i] != textBox2.Text)
+                            {
+                                c++;
+                            }
+                        }
+                        if (c != list.Count)
+                        {
+                            MessageBox.Show("Some values do not apply this condition in " + col_name);
+                            return;
+                        }
+                    }
+
+
+                }
+
+                textBox1.Text = string.Empty;
+                comboBox1.Text = string.Empty;
+                comboBox2.Text = string.Empty;
+                textBox2.Text = string.Empty;
+                map[col_name] = list;
+
             }
             else
             {
                 MessageBox.Show("Please Enter correct name for column");
             }
-            if (comboBox1.Text == "NOT NULL")
-            {
-                list = map[col_name];
-                for (int i = 0; i < list.Count; i++)
-                {
-                    if (list[i] == "")
-                    {
-                        MessageBox.Show(col_name + " contains NULL values ");
-                        return;
-                    }
-                }
-            }
-            if (comboBox1.Text == "Defult")
-            {
-                string defult = textBox3.Text.Trim();
-                list = map[col_name];
-                for (int i = 0; i < list.Count; i++)
-                {
-                    if (list[i] == "")
-                    {
-                        list[i] = defult;
-                    }
-                }
-            }
-            if (comboBox1.Text == "Unique")
-            {
-                HashSet<string> set = new HashSet<string>();
-                list = map[col_name];
-                for (int i = 0; i < list.Count; i++)
-                {
-                    set.Add(list[i]);
-                }
-
-                if (set.Count != list.Count)
-                {
-                    MessageBox.Show(col_name + " contains repeated values ");
-                    return;
-                }
-            }
-            if (comboBox1.Text == "Check")
-            {
-                if (comboBox2.Text == ">")
-                {
-                    int cond = 0;
-                    Int32.TryParse(textBox2.Text, out cond);
-                    int c = 0;
-                    list = map[col_name];
-                    for (int i = 0; i < list.Count; i++)
-                    {
-                        int list_int = 0;
-                        Int32.TryParse(list[i], out list_int);
-                        if (list_int > cond)
-                        {
-                            c++;
-                        }
-                    }
-                    if (c != list.Count)
-                    {
-                        MessageBox.Show("Some values do not apply this condition in " + col_name);
-                        return;
-                    }
-                }
-                if (comboBox2.Text == "<")
-                {
-                    int cond = 0;
-                    Int32.TryParse(textBox2.Text, out cond);
-                    int c = 0;
-                    list = map[col_name];
-                    for (int i = 0; i < list.Count; i++)
-                    {
-                        int list_int = 0;
-                        Int32.TryParse(list[i], out list_int);
-                        if (list_int < cond)
-                        {
-                            c++;
-                        }
-                    }
-                    if (c != list.Count)
-                    {
-                        MessageBox.Show("Some values do not apply this condition in " + col_name);
-                        return;
-                    }
-                }
-                if (comboBox2.Text == ">=")
-                {
-                    int cond = 0;
-                    Int32.TryParse(textBox2.Text, out cond);
-                    int c = 0;
-                    list = map[col_name];
-                    for (int i = 0; i < list.Count; i++)
-                    {
-                        int list_int = 0;
-                        Int32.TryParse(list[i], out list_int);
-                        if (list_int >= cond)
-                        {
-                            c++;
-                        }
-                    }
-                    if (c != list.Count)
-                    {
-                        MessageBox.Show("Some values do not apply this condition in " + col_name);
-                        return;
-                    }
-                }
-                if (comboBox2.Text == "<=")
-                {
-                    int cond = 0;
-                    Int32.TryParse(textBox2.Text, out cond);
-                    int c = 0;
-                    list = map[col_name];
-                    for (int i = 0; i < list.Count; i++)
-                    {
-                        int list_int = 0;
-                        Int32.TryParse(list[i], out list_int);
-                        if (list_int <= cond)
-                        {
-                            c++;
-                        }
-                    }
-                    if (c != list.Count)
-                    {
-                        MessageBox.Show("Some values do not apply this condition in " + col_name);
-                        return;
-                    }
-                }
-                if (comboBox2.Text == "=")
-                {
-                    int c = 0;
-                    list = map[col_name];
-                    for (int i = 0; i < list.Count; i++)
-                    {
-                        if (list[i] == textBox2.Text)
-                        {
-                            c++;
-                        }
-                    }
-                    if (c != list.Count)
-                    {
-                        MessageBox.Show("Some values do not apply this condition in " + col_name);
-                        return;
-                    }
-                }
-                if (comboBox2.Text == "!=")
-                {
-                    int c = 0;
-                    list = map[col_name];
-                    for (int i = 0; i < list.Count; i++)
-                    {
-                        if (list[i] != textBox2.Text)
-                        {
-                            c++;
-                        }
-                    }
-                    if (c != list.Count)
-                    {
-                        MessageBox.Show("Some values do not apply this condition in " + col_name);
-                        return;
-                    }
-                }
-
-
-            }
-
-            textBox1.Text = string.Empty;
-            comboBox1.Text = string.Empty;
-            comboBox2.Text = string.Empty;
-            textBox2.Text = string.Empty;
+           
 
         }
 
@@ -346,5 +350,48 @@ namespace gui
         {
 
         }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            String[] xml_name = _file_name.Split('.');
+            xml_name[1] = xml_name[0] + ".xml";
+            XmlWriter writer = XmlWriter.Create(xml_name[1]);
+            writer.WriteStartDocument();
+            writer.WriteStartElement(xml_name[0]);
+            writer.WriteEndElement();
+            writer.WriteEndDocument();
+            writer.Close();
+            Dictionary<string, List<string>>.KeyCollection keys = map.Keys;
+            Dictionary<string, List<string>>.ValueCollection values = map.Values;
+            int count = 0;
+
+            foreach (List<string> value in values)
+            {
+                count = value.Count;
+                break;
+            }
+                for(int i=0;i<count;i++)
+                {
+                    foreach(String key in keys)
+                    {
+                        XmlDocument doc = new XmlDocument();
+                        doc.Load(xml_name[1]);
+                        XmlElement root = doc.DocumentElement;
+                        XmlElement node = doc.CreateElement(key);
+                        node.InnerText = map[key][i];
+                        root.AppendChild(node);
+                        doc.Save(xml_name[1]);
+
+                    }
+
+                }
+            }        
+                
+                
+                   
+
+                
+            
+        
     }
 }

@@ -49,3 +49,14 @@ C:\Users\lero1\PycharmProjects\untitled1\project_files\gui\gui\obj\Debug\gui.csp
 C:\Users\lero1\PycharmProjects\untitled1\project_files\gui\gui\obj\Debug\gui.exe
 C:\Users\lero1\PycharmProjects\untitled1\project_files\gui\gui\obj\Debug\gui.pdb
 C:\Users\lero1\PycharmProjects\untitled1\project_files\gui\gui\obj\Debug\gui.csproj.ResolveComReference.cache
+F:\files\project_files\gui\gui\bin\Debug\gui.exe.config
+F:\files\project_files\gui\gui\obj\Debug\gui.csproj.ResolveComReference.cache
+F:\files\project_files\gui\gui\obj\Debug\gui.exe
+F:\files\project_files\gui\gui\obj\Debug\gui.pdb
+F:\files\project_files\gui\gui\bin\Debug\gui.exe
+F:\files\project_files\gui\gui\bin\Debug\gui.pdb
+F:\files\project_files\gui\gui\obj\Debug\gui.csprojResolveAssemblyReference.cache
+F:\files\project_files\gui\gui\obj\Debug\gui.files_pro.resources
+F:\files\project_files\gui\gui\obj\Debug\gui.Form1.resources
+F:\files\project_files\gui\gui\obj\Debug\gui.Properties.Resources.resources
+F:\files\project_files\gui\gui\obj\Debug\gui.csproj.GenerateResource.Cache
