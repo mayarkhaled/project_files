@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
 using System.Runtime.InteropServices;
-//using Excel = Microsoft.Office.Interop.Excel;
+using Excel = Microsoft.Office.Interop.Excel;
 using System.Xml;
 
 namespace gui
@@ -47,8 +47,6 @@ namespace gui
                 {
                     dataGridView1.Rows.Add(new string[] { "column" + (i + 1), colums[i] });
                 }
-                SR.Close();
-                f.Close();
                 for (int i = 0; i < colums.Length; i++)
                 {
                     List<string> mylist = new List<string>();
@@ -59,11 +57,14 @@ namespace gui
                         mylist.Add(arr[i]);
                     }
 
-                   // map[colums[i]] = mylist;
+                    map[colums[i]] = mylist;
                 }
+                SR.Close();
+                f.Close();
+
             }
 
-           /* else if (fileExt == ".xlsx")
+            else if (fileExt == ".xlsx")
             {
                 
                 Excel.Application xlApp = new Excel.Application();
@@ -99,8 +100,8 @@ namespace gui
                 Marshal.ReleaseComObject(xlWorkbook);
                 xlApp.Quit();
                 Marshal.ReleaseComObject(xlApp);
-            }*/
-            
+            }
+          
 
         }
 
@@ -137,7 +138,7 @@ namespace gui
             string _col = Array.Find(colums, Col => Col == textBox1.Text);
             if (_col != null)
             {
-                MessageBox.Show("Done");
+               
                 if (comboBox1.Text == "NOT NULL")
                 {
                     list = map[col_name];
@@ -145,9 +146,12 @@ namespace gui
                     {
                         if (list[i] == "")
                         {
+                            button2.Visible = false;
                             MessageBox.Show(col_name + " contains NULL values ");
                             return;
                         }
+                        else
+                            MessageBox.Show("Done , data satisfies this constrain");
                     }
                 }
                 if (comboBox1.Text == "Default")
@@ -161,6 +165,7 @@ namespace gui
                             list[i] = defult;
                         }
                     }
+                    MessageBox.Show("Done");
                 }
                 if (comboBox1.Text == "Unique")
                 {
@@ -173,9 +178,12 @@ namespace gui
 
                     if (set.Count != list.Count)
                     {
+                        button2.Visible = false;
                         MessageBox.Show(col_name + " contains repeated values ");
                         return;
                     }
+                    else
+                        MessageBox.Show("Done , data satisfies this constrain");
                 }
                 if (comboBox1.Text == "Check")
                 {
@@ -196,9 +204,12 @@ namespace gui
                         }
                         if (c != list.Count)
                         {
+                            button2.Visible = false;
                             MessageBox.Show("Some values do not apply this condition in " + col_name);
                             return;
                         }
+                        else
+                            MessageBox.Show("Done , data satisfies this constrain");
                     }
                     if (comboBox2.Text == "<")
                     {
@@ -217,9 +228,12 @@ namespace gui
                         }
                         if (c != list.Count)
                         {
+                            button2.Visible = false;
                             MessageBox.Show("Some values do not apply this condition in " + col_name);
                             return;
                         }
+                        else
+                            MessageBox.Show("Done , data satisfies this constrain");
                     }
                     if (comboBox2.Text == ">=")
                     {
@@ -238,9 +252,12 @@ namespace gui
                         }
                         if (c != list.Count)
                         {
+                            button2.Visible = false;
                             MessageBox.Show("Some values do not apply this condition in " + col_name);
                             return;
                         }
+                        else
+                            MessageBox.Show("Done , data satisfies this constrain");
                     }
                     if (comboBox2.Text == "<=")
                     {
@@ -259,9 +276,12 @@ namespace gui
                         }
                         if (c != list.Count)
                         {
+                            button2.Visible = false;
                             MessageBox.Show("Some values do not apply this condition in " + col_name);
                             return;
                         }
+                        else
+                            MessageBox.Show("Done , data satisfies this constrain");
                     }
                     if (comboBox2.Text == "=")
                     {
@@ -276,9 +296,12 @@ namespace gui
                         }
                         if (c != list.Count)
                         {
+                            button2.Visible = false;
                             MessageBox.Show("Some values do not apply this condition in " + col_name);
                             return;
                         }
+                        else
+                            MessageBox.Show("Done , data satisfies this constrain");
                     }
                     if (comboBox2.Text == "!=")
                     {
@@ -293,13 +316,18 @@ namespace gui
                         }
                         if (c != list.Count)
                         {
+                            button2.Visible = false;
                             MessageBox.Show("Some values do not apply this condition in " + col_name);
                             return;
                         }
+                        else
+                            MessageBox.Show("Done , data satisfies this constrain");
                     }
 
 
                 }
+                else
+                    button2.Visible = true;
 
                 textBox1.Text = string.Empty;
                 comboBox1.Text = string.Empty;
@@ -364,34 +392,37 @@ namespace gui
             Dictionary<string, List<string>>.KeyCollection keys = map.Keys;
             Dictionary<string, List<string>>.ValueCollection values = map.Values;
             int count = 0;
+            XmlDocument doc = new XmlDocument();
+            doc.Load(xml_name[1]);
+            XmlElement root = doc.DocumentElement;
 
             foreach (List<string> value in values)
             {
                 count = value.Count;
                 break;
             }
-                for(int i=0;i<count;i++)
-                {
-                    foreach(String key in keys)
-                    {
-                        XmlDocument doc = new XmlDocument();
-                        doc.Load(xml_name[1]);
-                        XmlElement root = doc.DocumentElement;
-                        XmlElement node = doc.CreateElement(key);
-                        node.InnerText = map[key][i];
-                        root.AppendChild(node);
-                        doc.Save(xml_name[1]);
 
-                    }
+            for (int i = 0; i < count; i++)
+            {
+                XmlElement item = doc.CreateElement("Item");
+                foreach (String key in keys)
+                {
+
+
+                    XmlElement node = doc.CreateElement(key);
+                    node.InnerText = map[key][i];
+                    item.AppendChild(node);
+
 
                 }
-            }        
-                
-                
-                   
+                root.AppendChild(item);
+                doc.Save(xml_name[1]);
 
-                
-            
-        
+            }
+            MessageBox.Show("Data added to XML");
+        }
+
     }
-}
+}   
+            
+

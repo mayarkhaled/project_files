@@ -29,6 +29,11 @@ namespace gui
             if (radioButton2.Checked)
             {
                 filename = select_file();
+                if (filename == null)
+                {
+                    radioButton2.Checked = false;
+                    return;
+                }
                 label4.Visible = false;
                 textBox3.Visible = false;
                 label3.Text = filename;
@@ -44,6 +49,11 @@ namespace gui
             if (radioButton1.Checked)
             {
                 filename = select_file();
+                if (filename == null)
+                {
+                    radioButton1.Checked = false;
+                    return;
+                }
                 button1.Visible = true;
                 label4.Visible = true;
                 textBox3.Visible = true;
@@ -83,13 +93,24 @@ namespace gui
         }
         private string select_file()
         {
-            
+
             OpenFileDialog file = new OpenFileDialog();
             if (file.ShowDialog() == DialogResult.OK)
             {
                 path = file.FileName;
             }
+            else
+            {
+                MessageBox.Show("please select a file ");
+                return null;
+            }
             string filename = Path.GetFileName(path);
+            string fileExt = System.IO.Path.GetExtension(filename);
+            if (fileExt != ".txt" && fileExt != ".xlsx")
+            {
+                MessageBox.Show("please select a text file or excel file");
+                return null;
+            }
             return filename;
         }
 
