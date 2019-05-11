@@ -150,9 +150,9 @@ namespace gui
                             MessageBox.Show(col_name + " contains NULL values ");
                             return;
                         }
-                        else
-                            MessageBox.Show("Done , data satisfies this constrain");
-                    }
+                      }
+                    MessageBox.Show("Done , data satisfies this constrain");
+
                 }
                 if (comboBox1.Text == "Default")
                 {
