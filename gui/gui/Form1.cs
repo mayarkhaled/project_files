@@ -39,7 +39,7 @@ namespace gui
                 label3.Text = filename;
                 label2.Visible = true;
                 label3.Visible = true;
-                files_pro fp = new files_pro(path , filename, '.');
+                files_pro fp = new files_pro(path , filename);
                 flowLayoutPanel1.Controls.Add(fp);
             }
         }
@@ -84,6 +84,12 @@ namespace gui
             if(textBox3.Text==string.Empty && radioButton1.Checked)
             {
                 MessageBox.Show("Please Enter delimeter");
+            }
+            else if(radioButton2.Checked)
+            {
+                files_pro fp = new files_pro(path, filename);
+                flowLayoutPanel1.Controls.Add(fp);
+                textBox3.Clear();
             }
             else { 
             files_pro fp = new files_pro(path , filename, textBox3.Text[0]);

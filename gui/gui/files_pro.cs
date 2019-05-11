@@ -23,16 +23,26 @@ namespace gui
         bool isNull = false;
         Dictionary<string, List<string>> map = new Dictionary<string, List<string>>();
         public files_pro(string path , string file_name, char delimiter) {
+            
             this.path = path;
             InitializeComponent();
             _file_name = file_name;
             _delimiter = delimiter;
         }
+        public files_pro(string path, string file_name)
+        {
+            this.path = path;
+            InitializeComponent();
+            _file_name = file_name;
+        }
         string[] recordes;
 
         private void files_pro_Load(object sender, EventArgs e)
         {
+          
             dataGridView1.Rows.Clear();
+            dataGridView1.Refresh();
+            map.Clear();
             string fileExt = System.IO.Path.GetExtension(_file_name);
 
 
@@ -421,6 +431,7 @@ namespace gui
 
             }
             MessageBox.Show("Data added to XML");
+            this.InitializeComponent();
         }
 
     }
