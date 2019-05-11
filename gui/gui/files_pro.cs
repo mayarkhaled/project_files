@@ -18,11 +18,12 @@ namespace gui
     {
         string _file_name;
         char _delimiter;
+        private string path;
         public string[] colums;
         bool isNull = false;
         Dictionary<string, List<string>> map = new Dictionary<string, List<string>>();
-        public files_pro(string file_name, char delimiter)
-        {
+        public files_pro(string path , string file_name, char delimiter) {
+            this.path = path;
             InitializeComponent();
             _file_name = file_name;
             _delimiter = delimiter;
@@ -68,7 +69,7 @@ namespace gui
             {
                 
                 Excel.Application xlApp = new Excel.Application();
-                Excel.Workbook xlWorkbook = xlApp.Workbooks.Open(_file_name);
+                Excel.Workbook xlWorkbook = xlApp.Workbooks.Open(path);
                 Excel._Worksheet xlWorksheet = xlWorkbook.Sheets[1];
                 Excel.Range xlRange = xlWorksheet.UsedRange;
 
