@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<shop>
+  <Item>
+    <item>itemdef</item>
+    <id>1</id>
+    <price>30</price>
+  </Item>
+  <Item>
+    <item>cheese</item>
+    <id>2</id>
+    <price>10</price>
+  </Item>
+  <Item>
+    <item>headohone</item>
+    <id>3</id>
+    <price>100</price>
+  </Item>
+</shop>

@@ -21,28 +21,30 @@ namespace gui
         private string path;
         public string[] colums;
         bool isNull = false;
-        Dictionary<string, List<string>> map = new Dictionary<string, List<string>>();
-        public files_pro(string path , string file_name, char delimiter) {
-            
+        string[] recordes;
+        Dictionary<string, List<string>> map ;
+        public files_pro(string path, string file_name, char delimiter)
+        {
+
             this.path = path;
             InitializeComponent();
             _file_name = file_name;
             _delimiter = delimiter;
+            map = new Dictionary<string, List<string>>();
+
         }
         public files_pro(string path, string file_name)
         {
             this.path = path;
             InitializeComponent();
             _file_name = file_name;
+            map = new Dictionary<string, List<string>>();
         }
-        string[] recordes;
+      
 
         private void files_pro_Load(object sender, EventArgs e)
         {
           
-            dataGridView1.Rows.Clear();
-            dataGridView1.Refresh();
-            map.Clear();
             string fileExt = System.IO.Path.GetExtension(_file_name);
 
 
@@ -72,7 +74,7 @@ namespace gui
                 }
                 SR.Close();
                 f.Close();
-
+             
             }
 
             else if (fileExt == ".xlsx")
@@ -111,6 +113,7 @@ namespace gui
                 Marshal.ReleaseComObject(xlWorkbook);
                 xlApp.Quit();
                 Marshal.ReleaseComObject(xlApp);
+              
             }
           
 
@@ -155,7 +158,7 @@ namespace gui
                     list = map[col_name];
                     for (int i = 0; i < list.Count; i++)
                     {
-                        if (list[i] == "")
+                        if (list[i] == ""||list[i]==" ")
                         {
                             button2.Visible = false;
                             MessageBox.Show(col_name + " contains NULL values ");
@@ -171,7 +174,7 @@ namespace gui
                     list = map[col_name];
                     for (int i = 0; i < list.Count; i++)
                     {
-                        if (list[i] == "")
+                        if (list[i] == ""||list[i]==" ")
                         {
                             list[i] = defult;
                         }
@@ -431,7 +434,6 @@ namespace gui
 
             }
             MessageBox.Show("Data added to XML");
-            this.InitializeComponent();
         }
 
     }

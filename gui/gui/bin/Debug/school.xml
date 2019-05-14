@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<school>
+  <Item>
+    <name>ahmed</name>
+    <id>1</id>
+    <address>cairo</address>
+  </Item>
+  <Item>
+    <name>noha</name>
+    <id>2</id>
+    <address>Alx</address>
+  </Item>
+  <Item>
+    <name>menna</name>
+    <id>3</id>
+    <address>cairo</address>
+  </Item>
+  <Item>
+    <name>schooldef</name>
+    <id>4</id>
+    <address>bnha</address>
+  </Item>
+</school>

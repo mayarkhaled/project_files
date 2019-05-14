@@ -1,0 +1,5 @@
+﻿1>------ Build started: Project: gui, Configuration: Debug Any CPU ------
+1>C:\Users\Mayar khaled\Desktop\project_files\gui\gui\Form1.cs(11,7,11,18): warning CS0105: The using directive for 'System.Linq' appeared previously in this namespace
+1>C:\Users\Mayar khaled\Desktop\project_files\gui\gui\files_pro.cs(23,14,23,20): warning CS0414: The field 'files_pro.isNull' is assigned but its value is never used
+1>  gui -> C:\Users\Mayar khaled\Desktop\project_files\gui\gui\bin\Debug\gui.exe
+========== Build: 1 succeeded, 0 failed, 0 up-to-date, 0 skipped ==========
